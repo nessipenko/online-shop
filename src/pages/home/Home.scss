@@ -1,0 +1,26 @@
+.home {
+    min-width: 100vw;
+
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 140px;
+    }
+
+    &__loading {
+        display: block;
+        padding-top: 70px;
+        width: 100%;
+        min-height: 180px;
+        background: #212121;
+        color: #FFF;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+
+}

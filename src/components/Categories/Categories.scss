@@ -1,0 +1,27 @@
+.categories {
+    font-size: 17px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    text-align: right;
+    cursor: pointer;
+
+    &__select {
+        background-color: #D7B399;
+        margin-top: 5px;
+        max-width: 200px;
+        text-align: right;
+        min-height: 25px;
+        font-size: 17px;
+        opacity: 0.6;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 200px;
+
+        &:hover {
+            color: #F9F6F1;
+        }
+
+    }
+
+}
