@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.14",
     "axios": "^1.5.0",
     "css-loader": "^6.8.1",
+    "parcel-plugin-svg-react": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
@@ -20,7 +21,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.7.4",
     "sass-loader": "^13.3.2",
-    "typescript": "^5.2.2",
+    "typescript": "^4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "file-loader": "^6.2.0",
     "sass": "^1.69.0"
   }
 }

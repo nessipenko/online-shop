@@ -1,51 +1,56 @@
-import React, { FormEvent, useEffect } from 'react'
+import React, { useEffect, ChangeEvent } from 'react'
 import './Categories.scss'
-import { getCategories, setSelectedCategory } from '../../redux/slices/categoriesSlice.ts'
+import {
+    getCategories,
+    setSelectedCategory,
+} from '../../redux/slices/categoriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { AppDispatch, RootState } from '../../redux/store'
 
-
-const Categories = () => {
-    const dispatch = useDispatch()
-    const categories = useSelector((state) => state.categories.items)
-    const selectedCategory = useSelector((state) => state.categories.selectedCategory)
+const Categories: React.FC = () => {
+    const categories = useSelector((state: RootState) => state.categories.items)
+    const selectedCategory = useSelector(
+        (state: RootState) => state.categories.selectedCategory
+    )
     const navigate = useNavigate()
-
+    const dispatch: AppDispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getCategories())
+        dispatch(getCategories() as any)
     }, [dispatch])
 
-
-    const handleCategoryChange = (e:FormEvent<HTMLSelectElement>) => {
+    const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedCategory = e.currentTarget.value
         navigate(`/products/${selectedCategory}`)
         dispatch(setSelectedCategory(selectedCategory))
     }
 
-    const categoryList = categories.map((category:string, id:number) => (
+    const categoryList = categories.map((category: string, id: number) => (
         <option
             value={category}
-            key={id}>{category}</option>
+            key={id}
+        >
+            {category}
+        </option>
     ))
 
-    const allOption = <option value="all">all</option>
-
+    const allOption = <option value='all'>all</option>
 
     return (
-        <div className="categories" >
-            <label htmlFor="categorySelect">Select a category: </label>
+        <div className='categories'>
+            <label htmlFor='categorySelect'>Select a category: </label>
             <br />
             <select
                 className='categories__select'
                 value={selectedCategory}
-                onChange={handleCategoryChange}>
+                onChange={handleCategoryChange}
+            >
                 {allOption}
                 {categoryList}
             </select>
-        </div >
+        </div>
     )
-
 }
 
 export default Categories

@@ -1,15 +1,14 @@
-// import { Link } from 'react-router-dom'
 import './Basket.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadBasketFromLS } from '../../redux/slices/basketSlice.ts'
-import { useEffect } from 'react'
-import Product from '../../components/Product/Product.tsx'
-
+import { loadBasketFromLS } from '../../redux/slices/basketSlice'
+import React, { useEffect } from 'react'
+import Product from '../../components/Product/Product'
+import { AppDispatch, RootState } from '../../redux/store'
 
 const Basket = () => {
-    const productBasket = useSelector((state) => state.shopBasket.basket)
-    const dispatch = useDispatch()
-    const totalSum = useSelector((state) => state.shopBasket.totalSum)
+    const productBasket = useSelector((state: RootState) => state.shopBasket.basket)
+    const dispatch: AppDispatch = useDispatch()
+    const totalSum = useSelector((state: RootState) => state.shopBasket.totalSum)
 
     useEffect(() => {
         dispatch(loadBasketFromLS())
@@ -22,7 +21,6 @@ const Basket = () => {
             image={image}
             id={id}
         />
-
     ))
 
     return (

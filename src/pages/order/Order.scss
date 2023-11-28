@@ -1,0 +1,29 @@
+.order,
+.delivery {
+    margin-top: 40px;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__descr {
+        margin-top: 10px;
+        text-align: center;
+        line-height: 1.5;
+        font-size: 18px;
+    }
+
+    &__subtitle {
+        margin-top: 20px;
+    }
+
+    &__list {
+        margin-top: 5px;
+
+        li {
+            list-style-type: disc;
+            margin: 10px 0 5px 26px;
+            font-size: 12px;
+        }
+    }
+}

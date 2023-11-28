@@ -1,3 +1,4 @@
+import React from 'react'
 import './Stock.scss'
 
 const Stock = () => {
@@ -9,3 +10,4 @@ const Stock = () => {
 }
 
 export default Stock
+

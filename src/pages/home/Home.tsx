@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import './Home.scss'
-import Product from '../../components/Product/Product.tsx'
-import Categories from '../../components/Categories/Categories.tsx'
-import { getCategoriesProd, getSearchProducts } from '../../redux/slices/productsSlice.ts'
+import Product from '../../components/Product/Product'
+import Categories from '../../components/Categories/Categories'
+import { getCategoriesProd, getSearchProducts } from '../../redux/slices/productsSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadBasketFromLS } from '../../redux/slices/basketSlice.ts'
+import { loadBasketFromLS } from '../../redux/slices/basketSlice'
+import { AppDispatch, RootState } from '../../redux/store'
 
 
 const Home = () => {
-    const dispatch = useDispatch()
-    const products = useSelector((state) => state.items.items)
-    const search = useSelector((state) => state.items.searchItems)
-    const selectedCategory = useSelector((state) => state.categories.selectedCategory)
+    const dispatch: AppDispatch = useDispatch()
+    const products = useSelector((state: RootState) => state.items.items)
+    const search = useSelector((state: RootState) => state.items.searchItems)
+    const selectedCategory = useSelector((state: RootState) => state.categories.selectedCategory)
 
     useEffect(() => {
         dispatch(loadBasketFromLS())
@@ -19,13 +20,13 @@ const Home = () => {
 
     useEffect(() => {
         selectedCategory === 'all'
-            ? dispatch(getCategoriesProd())
+            ? dispatch(getCategoriesProd(''))
             : dispatch(getCategoriesProd(selectedCategory))
     }, [selectedCategory, dispatch])
 
     useEffect(() => {
         search === ''
-            ? dispatch(getCategoriesProd())
+            ? dispatch(getCategoriesProd(''))
             : dispatch(getSearchProducts(search))
     }, [search, dispatch])
 

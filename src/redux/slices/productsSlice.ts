@@ -1,60 +1,61 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
 
 const API_BASE_URL = 'https://fakestoreapi.com/products'
 
 
-export const getCategoriesProd = createAsyncThunk(
+export const getCategoriesProd = createAsyncThunk<TItems[], string>(
     'items/fetchCategoriesProd',
-   async (category, ) => {
+    async (category: string, { rejectWithValue }) => {
         try {
             const url = category
                 ? `${API_BASE_URL}/category/${category}`
                 : API_BASE_URL
 
-            const { data } = await axios.get(url)
-            return data
-        } catch (e) {
-            console.log('error', e)
-            return null
+            const response = await axios.get<TItems[]>(url)
+            return response.data
+        } catch (error) {
+            console.error('error', error)
+            return rejectWithValue('Failed to get products')
         }
-    })
-
-    enum Status{
-        LOADING= 'loading',
-        SUCCESS= 'success',
-        ERROR='error',
     }
+)
 
-type TItems = {
+enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error',
+}
+
+export type TItems = {
     id: number,
-    title:  ``,
-    price: string | number,
+    title: string,
+    price: number,
     category: string,
     description: string,
     image: string
 }
 type TInitialState = {
-    items: Array<TItems>[],
-    searchItems:string
-    status:Status
+    items: TItems[],
+    searchItems: string
+    status: Status
 
 
 }
-const initialState:TInitialState = {
+const initialState: TInitialState = {
     items: [],
     searchItems: '',
-    status:Status.LOADING,
+    status: Status.LOADING,
 }
 
 const productSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
-        setSearchWord: (state, action) => {
+        setSearchWord: (state, action: PayloadAction<string>) => {
             state.searchItems = action.payload
         },
-        getSearchProducts: (state, action) => {
+        getSearchProducts: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter
                 (item => item.title.toLowerCase()
                     .includes(action.payload.toLowerCase()))
