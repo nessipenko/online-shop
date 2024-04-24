@@ -1,5 +1,6 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
+import { RootState } from "../store"
 
 const API_BASE_URL = 'https://fakestoreapi.com/products'
 
@@ -55,11 +56,11 @@ const productSlice = createSlice({
         setSearchWord: (state, action: PayloadAction<string>) => {
             state.searchItems = action.payload
         },
-        getSearchProducts: (state, action: PayloadAction<string>) => {
-            state.items = state.items.filter
-                (item => item.title.toLowerCase()
-                    .includes(action.payload.toLowerCase()))
-        }
+        // getSearchProducts: (state, action: PayloadAction<string>) => {
+        //     state.items = state.items.filter
+        //         (item => item.title.toLowerCase()
+        //             .includes(action.payload.toLowerCase()))
+        // }
     },
     extraReducers: (builder) => {
         builder.addCase(getCategoriesProd.pending, (state) => {
@@ -75,5 +76,15 @@ const productSlice = createSlice({
     }
 })
 
-export const { setSearchWord, getSearchProducts } = productSlice.actions
-export default productSlice.reducer
+export const { setSearchWord } = productSlice.actions;
+
+export const getSearchProducts = createSelector(
+    (state: RootState) => state.items.items,
+    (state: RootState) => state.items.searchItems,
+    (items, searchItems) =>
+        items.filter(item =>
+            item.title.toLowerCase().includes(searchItems.toLowerCase())
+        )
+);
+
+export default productSlice.reducer;

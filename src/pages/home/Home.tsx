@@ -10,8 +10,6 @@ import { AppDispatch, RootState } from '../../redux/store'
 
 const Home = () => {
     const dispatch: AppDispatch = useDispatch()
-    const products = useSelector((state: RootState) => state.items.items)
-    const search = useSelector((state: RootState) => state.items.searchItems)
     const selectedCategory = useSelector((state: RootState) => state.categories.selectedCategory)
 
     useEffect(() => {
@@ -24,18 +22,7 @@ const Home = () => {
             : dispatch(getCategoriesProd(selectedCategory))
     }, [selectedCategory, dispatch])
 
-    useEffect(() => {
-        search === ''
-            ? dispatch(getCategoriesProd(''))
-            : dispatch(getSearchProducts(search))
-    }, [search, dispatch])
-
-    const filteredProducts = products.filter((product) => {
-        if (selectedCategory === 'all') {
-            return true
-        }
-        return product.category === selectedCategory
-    })
+    const filteredProducts = useSelector(getSearchProducts);
 
     const renderContent = () => {
         if (filteredProducts.length) {
