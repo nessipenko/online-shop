@@ -13,6 +13,9 @@ import Stock from "./components/Stock/Stock"
 import Order from "./pages/order/Order"
 import Delivery from "./pages/delivery/Delivery"
 
+import 'animate.css';
+import Footer from "./components/Footer/Footer"
+
 function App() {
     return (
         <div className="App">
@@ -26,6 +29,7 @@ function App() {
                 <Route path="/delivery" element={<Delivery />} />
                 <Route path="/products/:category" element={<Home />} />
             </Routes>
+            <Footer />
         </div>
     )
 }

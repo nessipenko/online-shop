@@ -68,33 +68,45 @@ const Card = () => {
         const quantityInBasket = productInBasket ? productInBasket.quantity : 0
 
         return (
-            <div className="product-card__wrapper">
-                <div className="product-card">
-                    <div className="product-card__img">
-                        <img src={product.image} alt="product" />
-                        <div className="product-card__rate">Rate: {product.rating?.rate}</div>
-                    </div>
-                    <h2 className="product-card__title">{product.title}</h2>
-                    <div className="product-card__descr">{product?.description}</div>
-                    <div className="product-card__price">
-                        {product.price}$
-                        <div className="product__btns">
-                            <button onClick={handleAddToBasket} className="product__btns_add">
-                                Add to basket
-                            </button>
-                            <button onClick={handleRemoveFromBasket} className="product__btns_add">
-                                Remove
-                            </button>
+            <div className='deal'>
+                <div className="grey">
+                    <div className="container">
+                        <div className="deal__wrapper">
+                            <div className="deal__img card__img">
+                                <img src={product.image} alt={product.title} />
+                                <div className="card__rate">Rate: {product.rating?.rate}</div>
+                            </div>
+
+                            <div className="deal__descr">
+                                <div className="deal__title card__title">{product.title}</div>
+                                <div className="deal__price">
+                                    <span>{product.price}$</span>
+                                </div>
+                                <div className="deal__text card__text">{product?.description}</div>
+
+                                <div className="card__count">Stock quantity: {product.rating?.count}</div>
+
+                                <div className="deal__btns card__btns">
+
+                                    <button className="deal__btns_add btn card__btns-add"
+                                        onClick={handleAddToBasket}>Add to basket
+
+                                        <span className="card__quantity">{quantityInBasket}</span>
+                                    </button>
+
+                                    <button className="card__remove btn card__btns-remove"
+                                        onClick={handleRemoveFromBasket}>Remove
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="product__quantity card">Quantity in basket: <span>{quantityInBasket}</span></div>
-                        <div className="product-card__count">Stock quantity: {product.rating?.count}</div>
                     </div>
                 </div>
             </div>
         )
     }
 
-    return <div className="container">{renderContent()}</div>
+    return <div className='card'>{renderContent()}</div>
 }
 
 export default Card

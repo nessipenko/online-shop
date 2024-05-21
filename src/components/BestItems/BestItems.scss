@@ -1,0 +1,32 @@
+.bestItems {
+    margin-top: 84px;
+    margin-bottom: 148px;
+
+    &__title {
+        font-family: 'Federo';
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 50px;
+        letter-spacing: 0.02em;
+        color: #3A3A3A;
+        text-align: center;
+
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+
+        .product {
+            width: calc((100% - 120px) / 4);
+            max-width: calc((100% - 120px) / 4);
+
+            &:nth-child(n+5):nth-child(-n+7) {
+                width: calc((100% - 60px) / 3);
+                max-width: calc((100% - 60px) / 3);
+            }
+        }
+    }
+}

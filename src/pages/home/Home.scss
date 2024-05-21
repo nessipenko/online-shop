@@ -1,12 +1,13 @@
 .home {
     min-width: 100vw;
 
-
     &__wrapper {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        margin-bottom: 140px;
+        align-items: center;
+        margin-bottom: 50px;
+        gap: 30px;
     }
 
     &__loading {
@@ -20,6 +21,16 @@
         font-size: 30px;
         font-weight: 700;
         letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+
+    &__load-more {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 100px;
+        
+    }
+    &__btn{
         text-transform: uppercase;
     }
 

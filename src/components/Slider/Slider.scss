@@ -1,0 +1,67 @@
+.info {
+    margin-top: 50px;
+    position: relative;
+
+    .arrows {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 92px;
+        z-index: 1;
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+    }
+
+    .slider {
+        display: flex;
+        align-items: center;
+
+        &__slide {
+            width: 625px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        &__wrapper {
+            margin-left: 100px;
+        }
+
+        &__title {
+            font-family: 'Federo';
+            font-weight: 400;
+            font-size: 50px;
+            line-height: 60px;
+            letter-spacing: 0.02em;
+            color: #3A3A3A;
+            margin-bottom: 25px;
+        }
+    }
+
+    .grey {
+        position: absolute;
+        width: calc(100vw - 545px);
+        height: 500px;
+        top: 295px;
+        left: 545px;
+        background: #F6F6F6;
+        z-index: -1;
+    }
+}

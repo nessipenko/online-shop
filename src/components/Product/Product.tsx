@@ -5,21 +5,28 @@ import { Link } from 'react-router-dom'
 import { addToBasket, loadBasketFromLS, removeFromBasket } from '../../redux/slices/basketSlice'
 import './Product.scss'
 
+import refresh from '../../assets/icons/refresh.svg'
+import basket from '../../assets/icons/basket_card.svg'
+import heart from '../../assets/icons/heart.svg'
+
 type TProps = {
     title: string,
     price: number,
     image: string,
-    id: number
+    id: number,
+    hot?: boolean,
+    discount?: number;
 }
 
 const Product: React.FC<TProps> = (props) => {
-    const { title, price, image, id } = props
+    const { title, price, image, id, hot = false, discount = 0 } = props
     const dispatch: AppDispatch = useDispatch()
     const product = useSelector((state: RootState) =>
         state.shopBasket.basket.find((p) => p.id === id)
     )
 
     const [localQuantity, setLocalQuantity] = useState<number>(0)
+    const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
     useEffect(() => {
         dispatch(loadBasketFromLS())
@@ -53,19 +60,42 @@ const Product: React.FC<TProps> = (props) => {
         }
     }
 
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite)
+    }
+
+
+
     return (
-        <div className='product'>
-            <img className='product__image' src={image} alt={title} />
+        <div className="product">
+            {hot && <div className="product__hot">Hot</div>}
+            {discount > 0 && <div className="product__discount">-{discount}%</div>}
+            <div className='product__image'>
+                <img src={image} alt={title} />
+            </div>
+
             <Link className='product__title' to={`/card/${id}`}>{title}</Link>
 
-            <div className='product__price'>{localQuantity > 0 ? (price * localQuantity).toFixed(2) : price}$</div>
+            <div className='product__price'>{price}$</div>
             <div className="product__btns">
-                <button onClick={addBasket} className='product__btns_add'>Add to basket</button>
-                <button onClick={deleteFromBasket} className='product__btns_add'>Remove</button>
+                <button onClick={deleteFromBasket} className='product__btns_refresh btn'>
+                    <img src={refresh} alt="" />
+                </button>
+                <button className={`product__btns_heart btn ${isFavorite ? 'favorite' : ''}`} onClick={toggleFavorite}>
+                    <img src={heart} alt="" />
+                </button>
+                <div>
+                    <button onClick={addBasket} className='product__btns_add btn'>
+                        <img src={basket} alt="" />
+                    </button>
+
+                    <div className="product__btns_quantity">
+                        <span>{localQuantity}</span>
+                    </div>
+                </div>
+                {/* <button onClick={deleteFromBasket} className='product__btns_add'>Remove</button> */}
             </div>
-            <div className="product__quantity">
-                Quantity: <span>{localQuantity}</span>
-            </div>
+
         </div>
     )
 }

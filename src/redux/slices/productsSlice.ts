@@ -22,7 +22,7 @@ export const getCategoriesProd = createAsyncThunk<TItems[], string>(
     }
 )
 
-enum Status {
+export enum Status {
     LOADING = 'loading',
     SUCCESS = 'success',
     ERROR = 'error',
@@ -38,8 +38,10 @@ export type TItems = {
 }
 type TInitialState = {
     items: TItems[],
-    searchItems: string
-    status: Status
+    searchItems: string,
+    status: Status,
+    limit: number,
+    loadedMore: boolean
 
 
 }
@@ -47,6 +49,8 @@ const initialState: TInitialState = {
     items: [],
     searchItems: '',
     status: Status.LOADING,
+    limit:8,
+    loadedMore: false
 }
 
 const productSlice = createSlice({
@@ -56,11 +60,12 @@ const productSlice = createSlice({
         setSearchWord: (state, action: PayloadAction<string>) => {
             state.searchItems = action.payload
         },
-        // getSearchProducts: (state, action: PayloadAction<string>) => {
-        //     state.items = state.items.filter
-        //         (item => item.title.toLowerCase()
-        //             .includes(action.payload.toLowerCase()))
-        // }
+        increaseLimit:state=>{
+            state.limit+=8
+        },
+        setLoadedMore:(state, action)=>{
+            state.loadedMore=action.payload
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getCategoriesProd.pending, (state) => {
@@ -76,7 +81,7 @@ const productSlice = createSlice({
     }
 })
 
-export const { setSearchWord } = productSlice.actions;
+export const { setSearchWord, increaseLimit, setLoadedMore } = productSlice.actions;
 
 export const getSearchProducts = createSelector(
     (state: RootState) => state.items.items,

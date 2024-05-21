@@ -1,9 +1,81 @@
 .categories {
-    font-size: 17px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    text-align: right;
-    cursor: pointer;
+    position: relative;
+
+    .arrows {
+        position: absolute;
+        top: 65%;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 92px;
+        z-index: 1;
+
+        img {
+            height: 40px;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        font-family: 'Federo';
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 50px;
+        letter-spacing: 0.02em;
+        color: #3A3A3A;
+        text-align: center;
+    }
+
+    &__wrapper {
+        margin-top: 78px;
+        background: #FFFFFF;
+        border: 0.5px solid #E2E0DB;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        overflow-x: hidden;
+    }
+
+    &__item {
+        width: 160px;
+        height: 148px;
+        padding: 20px 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        cursor: pointer;
+        z-index: 2;
+        flex-shrink: 0;
+
+        img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+
+        }
+
+        &_name {
+            font-family: 'Open Sans';
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: -0.035em;
+            color: #757575;
+            text-wrap: nowrap;
+            text-transform: uppercase;
+        }
+
+    }
 
     &__select {
         background-color: #D7B399;
@@ -24,4 +96,11 @@
 
     }
 
+    .categories__item:hover,
+    .active {
+        background: #FBF9F3;
+        border: 0.5px solid #E2E0DB;
+
+
+    }
 }
